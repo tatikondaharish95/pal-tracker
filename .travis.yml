@@ -10,21 +10,9 @@ jobs:
   include:
     - stage: build and publish
       language: java
-<<<<<<< HEAD
       jdk: openjdk8
-
-=======
-      jdk: openjdk11
       addons:
         mariadb: '10.2'
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> cb5ef28... Add task for migrating databases
-=======
->>>>>>> cb5ef28... Add task for migrating databases
-=======
->>>>>>> cb5ef28... Add task for migrating databases
-      install: skip
       before_script:
         - mysql -uroot < databases/tracker/create_databases.sql
         - curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.1.1/flyway-commandline-5.1.1-linux-x64.tar.gz | tar xvz
