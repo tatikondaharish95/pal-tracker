@@ -21,18 +21,7 @@ public class JdbcTimeEntryRepositoryTest {
     private TimeEntryRepository subject;
     private JdbcTemplate jdbcTemplate;
 
-    @Before
-    public void setUp() throws Exception {
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setUrl(System.getenv("SPRING_DATASOURCE_URL"));
 
-        subject = new JdbcTimeEntryRepository(dataSource);
-
-        jdbcTemplate = new JdbcTemplate(dataSource);
-        jdbcTemplate.execute("DELETE FROM time_entries");
-
-        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-    }
 
     @Test
     public void createInsertsATimeEntryRecord() throws Exception {
