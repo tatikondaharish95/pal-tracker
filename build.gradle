@@ -58,4 +58,8 @@ flyway {
 
 task testMigrate(type: FlywayMigrateTask) {
     url = testDbUrl
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f3641252bb6f7bace990425a603176ce503f7f18
