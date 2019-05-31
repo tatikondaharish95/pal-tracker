@@ -1,12 +1,11 @@
 package io.pivotal.pal.tracker;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import io.pivotal.pal.tracker.TimeEntryRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.jdbc.core.ResultSetExtractor;
 
 import javax.sql.DataSource;
 import java.sql.Date;
@@ -21,6 +20,14 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
 
     public JdbcTimeEntryRepository(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public TimeEntry find(Long id) {
+        return jdbcTemplate.query(
+                "SELECT id, project_id, user_id, date, hours FROM time_entries WHERE id = ?",
+                new Object[]{id},
+                extractor);
     }
 
     @Override
@@ -44,18 +51,6 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
 
         return find(generatedKeyHolder.getKey().longValue());
     }
-    @Override
-    public TimeEntry find(Long id) {
-        return jdbcTemplate.query(
-                "SELECT id, project_id, user_id, date, hours FROM time_entries WHERE id = ?",
-                new Object[]{id},
-                extractor);
-    }
-
-    @Override
-    public List<TimeEntry> list() {
-        return jdbcTemplate.query("SELECT id, project_id, user_id, date, hours FROM time_entries", mapper);
-    }
 
     @Override
     public TimeEntry update(Long id, TimeEntry timeEntry) {
@@ -69,6 +64,11 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
                 id);
 
         return find(id);
+    }
+
+    @Override
+    public List<TimeEntry> list() {
+        return jdbcTemplate.query("SELECT id, project_id, user_id, date, hours FROM time_entries", mapper);
     }
 
     @Override
