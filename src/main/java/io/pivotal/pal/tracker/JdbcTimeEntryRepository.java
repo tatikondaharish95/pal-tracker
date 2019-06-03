@@ -1,9 +1,7 @@
 package io.pivotal.pal.tracker;
 
-<<<<<<< HEAD
-=======
+
 import com.mysql.cj.jdbc.MysqlDataSource;
->>>>>>> f3641252bb6f7bace990425a603176ce503f7f18
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,8 +24,6 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-<<<<<<< HEAD
-=======
     public TimeEntry find(Long id) {
         return jdbcTemplate.query(
                 "SELECT id, project_id, user_id, date, hours FROM time_entries WHERE id = ?",
@@ -36,7 +32,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
->>>>>>> f3641252bb6f7bace990425a603176ce503f7f18
+
     public TimeEntry create(TimeEntry timeEntry) {
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
 
@@ -59,7 +55,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-<<<<<<< HEAD
+
     public TimeEntry find(Long id) {
         return jdbcTemplate.query(
                 "SELECT id, project_id, user_id, date, hours FROM time_entries WHERE id = ?",
@@ -73,8 +69,8 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-=======
->>>>>>> f3641252bb6f7bace990425a603176ce503f7f18
+
+
     public TimeEntry update(Long id, TimeEntry timeEntry) {
         jdbcTemplate.update("UPDATE time_entries " +
                         "SET project_id = ?, user_id = ?, date = ?,  hours = ? " +
@@ -89,14 +85,12 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-<<<<<<< HEAD
-=======
+
     public List<TimeEntry> list() {
         return jdbcTemplate.query("SELECT id, project_id, user_id, date, hours FROM time_entries", mapper);
     }
 
     @Override
->>>>>>> f3641252bb6f7bace990425a603176ce503f7f18
     public void delete(Long id) {
         jdbcTemplate.update("DELETE FROM time_entries WHERE id = ?", id);
     }
@@ -112,7 +106,4 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     private final ResultSetExtractor<TimeEntry> extractor =
             (rs) -> rs.next() ? mapper.mapRow(rs, 1) : null;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> f3641252bb6f7bace990425a603176ce503f7f18
